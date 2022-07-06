@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "element-ui": "^2.15.9",
+    "three": "^0.142.0",
     "vue": "^2.6.10"
   },
   "devDependencies": {

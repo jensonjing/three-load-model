@@ -2,23 +2,15 @@
   <div class="model-com">
     <!--动态组件-->
     <div class="dynamic-components-div">
-      <div
-        id="container"
-        v-loading="isLoading"
-        element-loading-background="rgb(0, 0, 0,.8)"
-        element-loading-text="数据加载中..."
-      ></div>
+      <div id="container" v-loading="isLoading" element-loading-background="rgb(0, 0, 0,.8)"
+        element-loading-text="数据加载中..."></div>
       <!--画布的容器-->
     </div>
     <!--切换盒子-->
     <div class="toggle-div">
-      <el-button
-        type="primary"
-        v-for="item in modelList"
-        :class="[item.modelUrl == cuModel.modelUrl ? 'thisButs' : 'buts']"
-        :key="item.modelUrl"
-        @click="toggleModel(item)"
-      >
+      <el-button type="primary" v-for="item in modelList"
+        :class="[item.modelUrl == cuModel.modelUrl ? 'thisButs' : 'buts']" :key="item.modelUrl"
+        @click="toggleModel(item)">
         {{ item.text }}
       </el-button>
     </div>
@@ -46,11 +38,11 @@ export default {
       modelList: [
         //模型列表
         {
-          modelUrl: "model/玫瑰.glb", //模型路径
-          text: "玫瑰",
-          cameraPar: [60, 0.01, 10000, 0, 0, 10], //前三位为相机参数，后三位为相机位置
-          bg: "room", //表示背景类型
-          modePar: [0, -3, 0, 100, 100, 100], //前三位为模型位置，后三位为模型缩放
+          modelUrl: "model/ufo.glb",
+          text: "ufo",
+          cameraPar: [60, 0.01, 1000, 0, 30, 100],
+          bg: "sky",
+          modePar: [20, 10, -15, 100, 100, 100],
         },
         {
           modelUrl: "model/飞机.glb",
@@ -58,6 +50,20 @@ export default {
           cameraPar: [60, 0.01, 1000, 0, 50, 100],
           bg: "sky",
           modePar: [0, -100, 0, 10, 10, 10],
+        },
+        {
+          modelUrl: "model/人类头骨.glb", //模型路径
+          text: "头骨",
+          cameraPar: [60, 0.01, 10000, 0, 5, 10], //前三位为相机参数，后三位为相机位置
+          bg: "room", //表示背景类型
+          modePar: [2, 2, -3, 10, 10, 10], //前三位为模型位置，后三位为模型缩放
+        },
+        {
+          modelUrl: "model/玫瑰.glb", //模型路径
+          text: "玫瑰",
+          cameraPar: [60, 0.01, 10000, 0, 0, 10], //前三位为相机参数，后三位为相机位置
+          bg: "room", //表示背景类型
+          modePar: [0, -3, 0, 100, 100, 100], //前三位为模型位置，后三位为模型缩放
         },
         {
           modelUrl: "model/鲨鱼.glb",
@@ -259,41 +265,44 @@ export default {
 .model-com {
   height: 100%;
   width: 100%;
+
   .dynamic-components-div {
     height: 100%;
     width: 100%;
+
     #container {
       height: 100%;
       width: 100%;
     }
   }
+
   .toggle-div {
     position: absolute;
-    bottom: 0px;
-    left: 50%;
+    top: 0px;
     margin: 0px 0px 30px 0px;
-    transform: translateX(-50%);
-    display: flex;
     background-color: rgba(255, 255, 255, 0.5);
     color: #fff;
+
     .buts,
     .thisButs {
       cursor: pointer;
-      // background-color: #2393fc;
+      display: block;
       color: #fff;
-      margin: 10px;
+      margin: 20px;
       padding: 10px 40px;
       box-shadow: 0px 0px 5px black;
+
       &:hover {
         color: #000;
         box-shadow: 5px 5px 10px black;
-        background-color: #ededff;
+        background-color: #ff8282;
       }
     }
+
     .thisButs {
       color: #000;
       box-shadow: 5px 5px 10px black;
-      background-color: #ededff;
+      background-color: #ff8282;
     }
   }
 }

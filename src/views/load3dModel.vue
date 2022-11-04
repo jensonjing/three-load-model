@@ -113,6 +113,30 @@ export default {
       this.renderer = null;
     },
 
+    //销毁组数据
+    clearGroup(group) {
+      //清除缓存
+      const clearCache = (item) => {
+        item.geometry.dispose();//必须对组中的material与geometry进行dispose，清除占用的缓存
+        item.material.dispose();
+      };
+      //移除模型
+      const removeObj = (obj) => {
+        let arr = obj.children.filter((x) => x);
+        arr.forEach((item) => {
+          if (item.children.length) {
+            removeObj(item);
+          } else {
+            clearCache(item);
+            item.clear();
+          }
+        });
+        obj.clear();
+        arr = null;
+      };
+      removeObj(group);
+    },
+
     //初始化场景
     init(item) {
       scene = new THREE.Scene(); //新建场景

@@ -21,14 +21,17 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"; //鼠标控制器
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"; //模型加载器
-import roomImg from "./img/panorama/kt.png"; //房间全景图
-import beachImg from "./img/panorama/rtbh45hb44t.png"; //沙滩全景图
-import right from "./img/space/right.jpg"; //天空盒子
-import left from "./img/space/left.jpg";
-import top from "./img/space/top.jpg";
-import bottom from "./img/space/bottom.jpg";
-import front from "./img/space/front.jpg";
-import back from "./img/space/back.jpg";
+import panoramaImg1 from "@/assets/img/panorama/pImg20.png"; //全景图
+import panoramaImg2 from "@/assets/img/panorama/pImg4.png";
+import panoramaImg3 from "@/assets/img/panorama/pImg21.png";
+import panoramaImg4 from "@/assets/img/panorama/pImg14.png";
+import panoramaImg5 from "@/assets/img/panorama/pImg16.png";
+import right from "@/assets/img/skyBox/right.jpg"; //天空盒子
+import left from "@/assets/img/skyBox/left.jpg";
+import top from "@/assets/img/skyBox/top.jpg";
+import bottom from "@/assets/img/skyBox/bottom.jpg";
+import front from "@/assets/img/skyBox/front.jpg";
+import back from "@/assets/img/skyBox/back.jpg";
 let scene = null; //场景(在vue3中scene与mesh不能在data中定义，必须全局定义)
 export default {
   components: {},
@@ -38,39 +41,39 @@ export default {
       modelList: [
         //模型列表
         {
-          modelUrl: "model/ufo.glb",
-          text: "ufo",
-          cameraPar: [60, 0.01, 1000, 0, 30, 100],
-          bg: "sky",
-          modePar: [20, 10, -15, 100, 100, 100],
+          modelUrl: "model/导弹.glb",//模型路径
+          text: "导弹",//名称
+          bg: panoramaImg1,//全景图
+          cameraPar: [60, 0.01, 1000, -50, 30, 100],//前三位为相机参数，后三位为相机位置
+          modePar: [0, 0, -15, 50, 50, 50],//前三位为模型位置，后三位为模型缩放
         },
         {
-          modelUrl: "model/飞机.glb",
-          text: "飞机",
+          modelUrl: "model/左轮手枪.glb",
+          text: "左轮手枪",
           cameraPar: [60, 0.01, 1000, 0, 50, 100],
-          bg: "sky",
-          modePar: [0, -100, 0, 10, 10, 10],
+          bg: panoramaImg2,
+          modePar: [0, 0, 0, .1, .1, .1],
         },
         {
-          modelUrl: "model/人类头骨.glb", //模型路径
-          text: "头骨",
-          cameraPar: [60, 0.01, 10000, 0, 5, 10], //前三位为相机参数，后三位为相机位置
-          bg: "room", //表示背景类型
-          modePar: [2, 2, -3, 10, 10, 10], //前三位为模型位置，后三位为模型缩放
+          modelUrl: "model/武士刀.glb",
+          text: "武士刀",
+          cameraPar: [60, 0.01, 10000, -10, 5, 10],
+          bg: panoramaImg3,
+          modePar: [2, 0, -5, 20, 20, 20],
         },
         {
-          modelUrl: "model/玫瑰.glb", //模型路径
-          text: "玫瑰",
-          cameraPar: [60, 0.01, 10000, 0, 0, 10], //前三位为相机参数，后三位为相机位置
-          bg: "room", //表示背景类型
-          modePar: [0, -3, 0, 100, 100, 100], //前三位为模型位置，后三位为模型缩放
+          modelUrl: "model/道奇战斧.glb",
+          text: "道奇战斧",
+          cameraPar: [60, 0.01, 10000, -10, 5, 10],
+          bg: panoramaImg4,
+          modePar: [0, -3, 0, 5, 5, 5],
         },
         {
-          modelUrl: "model/鲨鱼.glb",
-          text: "鲨鱼",
-          cameraPar: [60, 0.01, 10000, 0, 0, 25],
-          bg: "beach",
-          modePar: [0, -5, 0, 50, 50, 50],
+          modelUrl: "model/无人机.glb",
+          text: "无人机",
+          cameraPar: [60, 0.01, 10000, 10, 5, 10],
+          bg: panoramaImg5,
+          modePar: [10, 0, 0, .2, .2, .2],
         },
       ],
       cuModel: "", //当前选中模型
@@ -143,7 +146,6 @@ export default {
       let dom = document.getElementById("container");
       let width = dom.clientWidth; //场景宽度
       let height = dom.clientHeight; //场景高度
-      // console.log(width,height);
       let k = width / height; //场景宽高比
       this.camera = new THREE.PerspectiveCamera(
         item.cameraPar[0],
@@ -168,16 +170,7 @@ export default {
       let axes = new THREE.AxesHelper(300); //坐标系(辅助开发)
       axes.rotation.x = 0.1;
       // scene.add(axes);//辅助开发坐标
-      // this.createUniverse();//宇宙背景
-      if (item.bg == "room") {
-        this.createPanorama(roomImg); //球体全景
-      }
-      if (item.bg == "beach") {
-        this.createPanorama(beachImg); //球体全景
-      }
-      if (item.bg == "sky" || item.bg == "") {
-        this.createSkyBox(); //天空盒子
-      }
+      this.createPanorama(item.bg); //球体全景
       this.createOrbitControls();
       this.createLight();
       this.loadModel(item);
@@ -237,11 +230,28 @@ export default {
 
     //创建光源
     createLight() {
-      this.ambientLight = new THREE.AmbientLight(0xffffff); //设置环境光
-      scene.add(this.ambientLight); //将环境光添加到场景中
-      this.pointLight = new THREE.PointLight(0xffffff, 1, 0);
-      this.pointLight.position.set(50, 50, 0); //设置点光源位置
-      scene.add(this.pointLight); //将点光源添加至场景
+      let lightColor = new THREE.Color(0xffffff);
+      let ambient = new THREE.AmbientLight(lightColor); //环境光
+      ambient.name = "环境光";
+      scene.add(ambient);
+      let directionalLight1 = new THREE.DirectionalLight(lightColor);
+      directionalLight1.position.set(0, 0, 500);
+      scene.add(directionalLight1); //平行光源添加到场景中
+      let directionalLight2 = new THREE.DirectionalLight(lightColor);
+      directionalLight2.position.set(0, 0, -500);
+      scene.add(directionalLight2); //平行光源添加到场景中
+      let directionalLight3 = new THREE.DirectionalLight(lightColor);
+      directionalLight3.position.set(500, 0, 0);
+      scene.add(directionalLight3); //平行光源添加到场景中
+      let directionalLight4 = new THREE.DirectionalLight(lightColor);
+      directionalLight4.position.set(-500, 0, 0);
+      scene.add(directionalLight4); //平行光源添加到场景中
+      let directionalLight5 = new THREE.DirectionalLight(lightColor);
+      directionalLight5.position.set(0, 500, 0);
+      scene.add(directionalLight5); //平行光源添加到场景中
+      let directionalLight6 = new THREE.DirectionalLight(lightColor);
+      directionalLight6.position.set(0, -500, 0);
+      scene.add(directionalLight6); //平行光源添加到场景中
     },
 
     //加载模型

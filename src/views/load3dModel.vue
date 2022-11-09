@@ -22,10 +22,12 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"; //鼠标控制器
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"; //模型加载器
 import panoramaImg1 from "@/assets/img/panorama/pImg20.png"; //全景图
-import panoramaImg2 from "@/assets/img/panorama/pImg4.png";
+import panoramaImg2 from "@/assets/img/panorama/pImg2.png";
 import panoramaImg3 from "@/assets/img/panorama/pImg21.png";
 import panoramaImg4 from "@/assets/img/panorama/pImg14.png";
 import panoramaImg5 from "@/assets/img/panorama/pImg16.png";
+import panoramaImg6 from "@/assets/img/panorama/pImg11.png";
+import panoramaImg7 from "@/assets/img/panorama/pImg4.png";
 import right from "@/assets/img/skyBox/right.jpg"; //天空盒子
 import left from "@/assets/img/skyBox/left.jpg";
 import top from "@/assets/img/skyBox/top.jpg";
@@ -74,6 +76,20 @@ export default {
           cameraPar: [60, 0.01, 10000, 10, 5, 10],
           bg: panoramaImg5,
           modePar: [10, 0, 0, .2, .2, .2],
+        },
+        {
+          modelUrl: "model/鲨鱼.glb",
+          text: "鲨鱼",
+          cameraPar: [60, 0.01, 10000, 10, 5, 10],
+          bg: panoramaImg6,
+          modePar: [0, 0, 0, 40, 40, 40],
+        },
+        {
+          modelUrl: "model/玫瑰.glb",
+          text: "玫瑰",
+          cameraPar: [60, 0.01, 10000, 10, 5, 10],
+          bg: panoramaImg7,
+          modePar: [0, -3, 0, 200, 200, 200],
         },
       ],
       cuModel: "", //当前选中模型

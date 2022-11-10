@@ -1,19 +1,18 @@
-# three-load-model
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# threeJs加载3d模型
+* 浏览链接：https://xi1213.gitee.io/three-load-model
+* 项目链接：https://gitee.com/xi1213/three-load-model
+# 项目简介
+* 支持模型切换。
+* 支持全景图查看。
+* 支持鼠标操控模型缩放旋转。
+# 相关技术
+* vue2主体框架。
+* three.js生成场景、加载模型。
+# 项目使用
+* 安装依赖：npm install
+* 项目运行：npm run serve
+* 项目打包：npm run build
+# 详情说明
+![img](./mdImg/1.jpg)
+* 左边切换模型与场景。
+* 鼠标可在场景中旋转缩放模型。

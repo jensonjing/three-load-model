@@ -1,6 +1,7 @@
 # threeJs加载3d模型
 * 浏览链接：https://xi1213.gitee.io/three-load-model
 * 项目链接：https://gitee.com/xi1213/three-load-model
+* csdn文章：https://blog.csdn.net/xi1213/article/details/123244316
 # 项目简介
 * 支持模型切换。
 * 支持全景图查看。

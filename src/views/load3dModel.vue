@@ -63,34 +63,6 @@ export default {
           bg: panoramaImg3,
           modePar: [2, 0, -5, 20, 20, 20],
         },
-        {
-          modelUrl: "model/道奇战斧.glb",
-          text: "道奇战斧",
-          cameraPar: [60, 0.01, 10000, -10, 5, 10],
-          bg: panoramaImg4,
-          modePar: [0, -3, 0, 5, 5, 5],
-        },
-        {
-          modelUrl: "model/无人机.glb",
-          text: "无人机",
-          cameraPar: [60, 0.01, 10000, 10, 5, 10],
-          bg: panoramaImg5,
-          modePar: [10, 0, 0, .2, .2, .2],
-        },
-        {
-          modelUrl: "model/鲨鱼.glb",
-          text: "鲨鱼",
-          cameraPar: [60, 0.01, 10000, 10, 5, 10],
-          bg: panoramaImg6,
-          modePar: [0, 0, 0, 40, 40, 40],
-        },
-        {
-          modelUrl: "model/玫瑰.glb",
-          text: "玫瑰",
-          cameraPar: [60, 0.01, 10000, 10, 5, 10],
-          bg: panoramaImg7,
-          modePar: [0, -3, 0, 200, 200, 200],
-        },
       ],
       cuModel: "", //当前选中模型
       camera: null, //相机
